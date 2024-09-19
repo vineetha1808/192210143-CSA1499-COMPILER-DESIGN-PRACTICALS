@@ -1,0 +1,21 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+^[aeiouAEIOU].* { printf("string is accepted\n"); }
+^[^aeiouAEIOU].* { printf("string is not accepted\n"); }
+
+%%
+
+int yywrap()
+{
+return 1;
+}
+
+int main()
+{
+printf("Enter the string: ");
+yylex();
+return 0;
+}
