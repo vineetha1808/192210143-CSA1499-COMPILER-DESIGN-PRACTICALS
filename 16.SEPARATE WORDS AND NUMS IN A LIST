@@ -1,0 +1,53 @@
+%{
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#define MAX_LIST_SIZE 100
+char* numList[MAX_LIST_SIZE];
+char* wordList[MAX_LIST_SIZE];
+int numCount = 0;
+int wordCount = 0;
+
+void addToNumList(char *text) {
+if (numCount < MAX_LIST_SIZE) {
+numList[numCount++] = strdup(text);
+}
+}
+
+void addToWordList(char *text) {
+if (wordCount < MAX_LIST_SIZE) {
+wordList[wordCount++] = strdup(text);
+}
+}
+%}
+
+%%
+
+[0-9]+ { addToNumList(yytext); }
+[a-zA-Z]+ { addToWordList(yytext); }
+
+[ \t\n]+ ; /* Ignore whitespace */
+
+. ; /* Ignore any other character */
+
+%%
+
+int main() {
+printf("\nEnter words and numbers list:);
+yylex();
+printf("\nNumbers List:\n");
+for (int i = 0; i < numCount; i++) {
+printf("%s\n", numList[i]);
+}
+
+printf("\nWords List:\n");
+for (int i = 0; i < wordCount; i++) {
+    printf("%s\n", wordList[i]);
+}
+
+return 0;
+}
+
+int yywrap() {
+return 1;
+}
