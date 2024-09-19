@@ -1,0 +1,27 @@
+%{
+int counter = 0; // To store the length of the longest word
+
+// Define yywrap with the correct signature
+int yywrap(void) {
+return 1;
+}
+%}
+
+%%
+[a-zA-Z]+ {
+if (yyleng > counter) { // Check if the current word is longer
+counter = yyleng; // Update counter if the current word is the longest
+}
+}
+
+[ \t\n] ; // Ignore spaces, tabs, and newlines
+
+. ; // Ignore any other character
+
+%%
+
+int main() {
+yylex(); // Start lexical analysis
+printf("Length of the longest word: %d\n", counter); // Print the longest word length
+return 0;
+}
