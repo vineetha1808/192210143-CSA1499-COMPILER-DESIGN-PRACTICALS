@@ -1,0 +1,17 @@
+#include<stdio.h>
+#include<ctype.h>
+#include<string.h>
+int main()
+{
+  int i;
+  char b[100];
+  printf("\n Enter the string");
+  scanf("%s",b);
+  for(i=0;i<strlen(b);i++)
+    {
+    if(b[i]=='/')
+      printf("\n It is a comment");
+    else
+      printf("\n It is not a comment");
+    }
+  }
